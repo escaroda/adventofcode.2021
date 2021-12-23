@@ -1,4 +1,5 @@
-fs = require('fs');
+const fs = require('fs');
+const path = require("path");
 
 const getWinner = (numbers, boards) => {
   const numberOfRows = boards[0].length;
@@ -50,10 +51,8 @@ const getWinner = (numbers, boards) => {
   throw Error('No winners')
 }
 
-fs.readFile('input', 'utf8', function (err, data) {
-  if (err) {
-    return console.log(err);
-  }
+fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
+  if (err) return console.error(err);
 
   const parsedData = data.trim().split('\n\n');
   const numbers = parsedData.shift().split(',');

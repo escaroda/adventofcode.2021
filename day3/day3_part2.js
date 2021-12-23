@@ -1,4 +1,5 @@
-fs = require('fs');
+const fs = require('fs');
+const path = require("path");
 
 
 const getRating = (numbers, getMostCommon) => {
@@ -34,10 +35,8 @@ const getRating = (numbers, getMostCommon) => {
 }
 
 
-fs.readFile('input', 'utf8', function (err, data) {
-  if (err) {
-    return console.log(err);
-  }
+fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
+  if (err) return console.error(err);
 
   const numbers = data.split('\n');
   numbers.pop();

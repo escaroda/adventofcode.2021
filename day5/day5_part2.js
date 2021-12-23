@@ -1,4 +1,5 @@
-fs = require('fs');
+const fs = require('fs');
+const path = require("path");
 
 
 const ensureOrderOfNumbers = (smaller, larger) => {
@@ -10,10 +11,8 @@ const ensureOrderOfNumbers = (smaller, larger) => {
   return [smaller, larger]
 }
 
-fs.readFile('input', 'utf8', function (err, data) {
-  if (err) {
-    return console.log(err);
-  }
+fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
+  if (err) return console.error(err);
 
   const lines = data.trim().split('\n').map(line => line.split(' -> ').map(coordinates => coordinates.split(',')));
 
