@@ -2,7 +2,6 @@ fs = require('fs');
 
 
 const getBoardScore = (board, boardNumber) => {
-  console.log('boardNumber: ', boardNumber)
   const sumOfUnmarked = board.reduce((previousValue, currentValue) => {
     const currentSum = currentValue.reduce((previousValue, currentValue) => {
       if (currentValue) previousValue += parseInt(currentValue, 10)
@@ -12,7 +11,6 @@ const getBoardScore = (board, boardNumber) => {
   }, 0);
 
   boardNumber = parseInt(boardNumber, 10);
-  // console.log(sumOfUnmarked, boardNumber)
 
   return sumOfUnmarked * boardNumber
 }
