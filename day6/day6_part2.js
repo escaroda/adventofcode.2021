@@ -16,15 +16,15 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
     generationTree[fishTimer] += 1;
   }
 
-  let days = NUMBER_OF_DAYS;
-  while (days) {
+  let daysLeft = NUMBER_OF_DAYS;
+  while (daysLeft) {
     const newFish = generationTree[0];
     for (let i = 0; i < generationTree.length; i++) {
       generationTree[i] = generationTree[i + 1] || 0;
     }
     generationTree[RESET_TIME] += newFish;
     generationTree[NEW_FISH_TIME] += newFish;
-    days--;
+    daysLeft--;
   }
 
   let total = 0;
