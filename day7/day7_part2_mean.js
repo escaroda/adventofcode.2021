@@ -3,7 +3,7 @@ const path = require("path");
 
 
 /**
- * This is optimized version since cheapest fuel outcome should gravitate toward mean value.
+ * This is optimized version since the cheapest fuel outcome should gravitate toward mean value.
  * Require tweaking depending on input data.
  */
 const PRECISION_SPAN = 4;
