@@ -21,7 +21,7 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
     fuel += Math.abs(position - median);
   }
 
-  console.log(`The cheapest possible outcome is ${fuel} fuel (position ${median})`)
+  console.log(`The cheapest possible outcome is ${fuel} fuel (position ${median})`);
 
   return
 });
