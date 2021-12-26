@@ -7,7 +7,6 @@ const MULTIPLY_TOGETHER = 3;
 const isLessOrEqual = (a, b) => (a || a === 0) && a <= b;
 const getAdjacentPoints = (a, b) => [[a, b - 1], [a, b + 1], [a - 1, b], [a + 1, b]];
 
-
 fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
   if (err) return console.error(err);
 
@@ -23,7 +22,7 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
 
       if (height === 9) continue; // 9 is a max height and can't be a low point
 
-      // Check adjacent locations
+      // Check adjacent points
       const left = line[j - 1];
       if (isLessOrEqual(left, height)) continue;
 
@@ -43,7 +42,7 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
 
   // Calculate basins
   for (const point of lowPointCoordinates) {
-    let currentBasin = 1;
+    let currentBasinSize = 1;
     const [i, j] = point;
     const lowestHeight = heightmap[i][j];
     const stack = getAdjacentPoints(i, j);
@@ -55,12 +54,12 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
       // Not sure about adjacentHeight === lowestHeight case, but with current input data result is the same
       if (!adjacentHeight || adjacentHeight === 9 || adjacentHeight < lowestHeight) continue;
 
-      // Current point is part of basin -> add adjacent locations to stack and prevent further appearance of the current point
+      // Current point is part of basin -> add adjacent points to stack and prevent further appearance of the current point
       stack.push(...getAdjacentPoints(y, x));
       heightmap[y][x] = null;
-      currentBasin++;
+      currentBasinSize++;
     }
-    basinSizes.push(currentBasin);
+    basinSizes.push(currentBasinSize);
   }
   basinSizes.sort((a, b) => a - b);
 
