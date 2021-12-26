@@ -30,7 +30,7 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
       const down = heightmap[i + 1]?.[j];
       if (isLessOrEqual(down, height)) continue;
 
-      j++; // skip next point because it can't be lower then this one
+      j++; // skip next point because it can't be lower than this one
       lowPoints.push(height);
     }
   }
