@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require("path");
 
 
+const isLessOrEqual = (a, b) => (a || a === 0) && a <= b;
+
 fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
   if (err) return console.error(err);
 
@@ -13,21 +15,22 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
     for (let j = 0; j < line.length; j++) {
       const height = line[j]; // At point (j, i)
 
-      if (height === 9) continue;
-      
+      if (height === 9) continue; // 9 is a max height and can't be a low point
+
       // Check adjacent locations
       const left = line[j - 1];
-      if ((left || left === 0) && left <= height) continue;
+      if (isLessOrEqual(left, height)) continue;
 
       const right = line[j + 1];
-      if ((right || right === 0) && right <= height) continue;
+      if (isLessOrEqual(right, height)) continue;
 
       const up = heightmap[i - 1]?.[j];
-      if ((up || up === 0) && up <= height) continue;
+      if (isLessOrEqual(up, height)) continue;
 
       const down = heightmap[i + 1]?.[j];
-      if ((down || down === 0) && down <= height) continue;
+      if (isLessOrEqual(down, height)) continue;
 
+      j++; // skip next point because it can't be lower then this one
       lowPoints.push(height);
     }
   }
