@@ -26,9 +26,9 @@ for (let i = 0; i < legalCharacters.length / 2; i++) {
 fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
   if (err) return console.error(err);
 
-  const lines = data.trim().split('\n')
+  const lines = data.trim().split('\n');
 
-  lineLoop:
+  nextLine:
   for (const line of lines) {
     const closingStack = [];
     for (const character of line) {
@@ -38,7 +38,7 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
         const expectedCharacter = closingStack.pop();
         if (expectedCharacter !== character) {          // Found error
           incorrectCharacterCounter[character] += 1;    // Assume input data doesn't contain illegal characters
-          continue lineLoop;                            // We need the first illegal character in each corrupted line only
+          continue nextLine;                            // We need the first illegal character in each corrupted line only
         }
       }
     }
@@ -50,7 +50,7 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
     totalErrorScore += count * characterErrorScore[character];
   }
 
-  console.log(`Total syntax error score for the first illegal character in each corrupted line is ${totalErrorScore}`)
+  console.log(`Total score for the first illegal character in each corrupted line is ${totalErrorScore}`);
 
   return
 });
