@@ -16,8 +16,8 @@ const getAdjacentPoints = (a, b) => [
 fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
   if (err) return console.error(err);
 
-  let amountOfOctopuses = 0;
-  const energyLevels = data.trim().split('\n').map(line => line.split('').map(energyLevel => { amountOfOctopuses += 1; return parseInt(energyLevel, 10) }));
+  const energyLevels = data.trim().split('\n').map(line => line.split('').map(energyLevel => parseInt(energyLevel, 10)));
+  const amountOfOctopuses = energyLevels.length * energyLevels[0].length;
   const adjacentStack = [];
   
   const processEnergyLevel = (i, j) => {
