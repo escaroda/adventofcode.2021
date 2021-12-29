@@ -34,9 +34,9 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
     if (cave.length === 2 && cave === cave.toLowerCase()) {
       if (~smallCaves.indexOf(cave)) {                        // This is small cave and it was visited before
         if (smallCaveVisitedTwice) return;                    // Terminate current route because we visited same or another small cave twice already
-        smallCaveVisitedTwice = cave;                         // Remember this small cave was visited twice on current route
+        smallCaveVisitedTwice = cave;                         // Remember it was visited twice
       }
-      smallCaves.push(cave)                                   // Remember that this small cave was visited once
+      smallCaves.push(cave)                                   // Remember it was visited for the first time
     }
 
     if (cave === 'end') {
@@ -47,7 +47,6 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
       }
     }
   }
-
 
   start();
 
