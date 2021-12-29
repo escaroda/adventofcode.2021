@@ -42,8 +42,8 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
     if (cave === 'end') {
       numberOfPaths += 1;
     } else if (children[cave]) {
-      for (const childrenCave of children[cave]) {
-        start(childrenCave, [...smallCaves], smallCaveVisitedTwice);
+      for (const childCave of children[cave]) {
+        start(childCave, [...smallCaves], smallCaveVisitedTwice);
       }
     }
   }
