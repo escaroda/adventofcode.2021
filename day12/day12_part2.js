@@ -30,24 +30,28 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
 
   let numberOfPaths = 0;
 
-  const start = (cave = 'start', smallCaves = []) => {
-    if (cave.length === 2 && cave === cave.toLowerCase()) { // This is small cave
-      if (~smallCaves.indexOf(cave)) return;                // Terminate current route since this small cave was already visited
-      smallCaves.push(cave)
+  const start = (cave = 'start', smallCaves = [], smallCaveVisitedTwice) => {
+    if (cave.length === 2 && cave === cave.toLowerCase()) {
+      if (~smallCaves.indexOf(cave)) {                        // This is small cave and it was visited before
+        if (smallCaveVisitedTwice) return;                    // Terminate current route because we visited same or another small cave twice already
+        smallCaveVisitedTwice = cave;                         // Remember this small cave was visited twice on current route
+      }
+      smallCaves.push(cave)                                   // Remember that this small cave was visited once
     }
 
     if (cave === 'end') {
       numberOfPaths += 1;
     } else if (children[cave]) {
       for (const childrenCave of children[cave]) {
-        start(childrenCave, [...smallCaves]);
+        start(childrenCave, [...smallCaves], smallCaveVisitedTwice);
       }
     }
   }
 
+
   start();
-  
-  console.log(`There are ${numberOfPaths} paths through this cave system that visit small caves at most once`);
+
+  console.log(`There are ${numberOfPaths} paths through this cave system, given new rules`);
 
   return
 });
