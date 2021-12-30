@@ -6,7 +6,8 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
   if (err) return console.error(err);
 
   const connections = data.trim().split('\n').map(connection => connection.split('-'));
-    
+  
+  // Gather all connections for each cave
   const children = {};
   for (const connection of connections) {
     const [cave1, cave2] = connection;
