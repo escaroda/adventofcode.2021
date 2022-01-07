@@ -2,17 +2,15 @@ const fs = require('fs');
 const path = require("path");
 
 
-getAdjacentPoints = (i, j) => {
-  return [[i - 1, j], [i, j + 1], [i + 1, j], [i, j - 1]] // Up, Right, Down, Left
-}
+getAdjacentPoints = (i, j) => [[i - 1, j], [i, j + 1], [i + 1, j], [i, j - 1]]; // Up, Right, Down, Left
 
 fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
   if (err) return console.error(err);
 
-  const riskLevels = data.trim().split('\n').map(line => line.split('').map(level => parseInt(level, 10)));
+  const riskLevels = data.trim().split('\n').map(line => line.split('').map(riskLevel => parseInt(riskLevel, 10)));
 
   const pointsToVisit = [{ totalRisk: 0, coordinates: [0, 0] }]; // Start with top left point
-  const lowestRisk = [[0]] // Total lowest risk of any path from the top left to each point
+  const lowestRisk = [[0]]; // Total lowest risk of any path from the top left to each point
   
   while (pointsToVisit.length) {
     const currentPoint = pointsToVisit.pop();
@@ -21,9 +19,9 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
 
     for (const coordinates of adjacentPoints) {
       const [i, j] = coordinates;
-      const adjacentRisk = riskLevels[i]?.[j];
-      if (adjacentRisk) {
-        const totalRisk = adjacentRisk + currentPoint.totalRisk;
+      const riskLevel = riskLevels[i]?.[j];
+      if (riskLevel) {
+        const totalRisk = riskLevel + currentPoint.totalRisk;
         const lowestTotalRisk = lowestRisk[i]?.[j];
         if (!lowestTotalRisk || lowestTotalRisk > totalRisk) {
           pointsToVisit.push({ totalRisk, coordinates });
@@ -37,7 +35,7 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
   const lastLine = lowestRisk[lowestRisk.length - 1];
   const lowestTotalRisk = lastLine[lastLine.length - 1];
 
-  console.log(`The lowest total risk of any path from the top left to the bottom right is ${lowestTotalRisk}`)
+  console.log(`The lowest total risk of any path from the top left to the bottom right is ${lowestTotalRisk}`);
 
   return
 });
