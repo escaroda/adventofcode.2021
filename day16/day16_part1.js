@@ -25,11 +25,12 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
     const packet = {};
     packet.version = parseBits();
     packet.id = parseBits();
-    packet.subPackets = [];
-
+    
     versionSum += packet.version;
 
     if (packet.id !== 4) { // operator
+      packet.subPackets = [];
+      
       const lengthTypeID = parseBits(1);
       if (lengthTypeID) {
         let numberOfSubPackets = parseBits(11);
