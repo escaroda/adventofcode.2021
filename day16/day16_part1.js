@@ -3,7 +3,6 @@ const path = require("path");
 
 
 const BINARY_DATA_BIT_LENGTH = 4;
-const MIN_PACKET_LENGTH = 7; // to skip extra 0 bits at the end
 
 fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
   if (err) return console.error(err);
@@ -20,15 +19,14 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
   const state = { pointer: 0 }
   parseBits = (length = 3) => parseInt(bits.slice(state.pointer, state.pointer += length), 2);
 
-  const packets = []; // Not required but useful for debugging
   let versionSum = 0;
 
   getPacket = () => {
-    const packet = {
-      subPackets: []
-    };
+    const packet = {};
     packet.version = parseBits();
     packet.id = parseBits();
+    packet.subPackets = [];
+
     versionSum += packet.version;
 
     if (packet.id !== 4) { // operator
@@ -57,9 +55,7 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
     return packet;
   }
 
-  while (state.pointer < bits.length && (bits.length - state.pointer > MIN_PACKET_LENGTH)) {
-    packets.push(getPacket())
-  }
+  getPacket()
 
   console.log(`The sum of all version numbers is ${versionSum}`);
 
