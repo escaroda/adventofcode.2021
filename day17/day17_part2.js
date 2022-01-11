@@ -44,7 +44,7 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
     xVelocity++;
   }
 
-  console.log(`There are ${hits} distinct initial velocity values`)
+  console.log(`There are ${hits} distinct initial velocity values that cause the probe to be within the target area`);
 
   return
 });
