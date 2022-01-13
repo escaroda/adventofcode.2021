@@ -2,6 +2,9 @@ const fs = require('fs');
 const path = require("path");
 
 
+/**
+ * I think it should be refactored to be solved with bits and bitwise operators (AND, OR, XOR)
+ */
 const uniqueDigits = [1, 4, 7, 8];
 const digitSegments = ['abcefg', 'cf', 'acdeg', 'acdfg', 'bcdf', 'abdfg', 'abdefg', 'acf', 'abcdefg', 'abcdfg'];
 const uniqueDigitLengths = uniqueDigits.map(digit => digitSegments[digit].length);
