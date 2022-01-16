@@ -126,7 +126,7 @@ const checkIfOverlap = (baseScan, comparedScan) => {
               return { 
                 beacons: applyPositionForAllPoints(orientedScan, shiftX, shiftY, shiftZ),
                 scannerPosition: [shiftX, shiftY, shiftZ], // relative to the first scanner
-              };
+              }
             }
           }
         }
