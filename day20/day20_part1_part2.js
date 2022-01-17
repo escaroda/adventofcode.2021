@@ -78,18 +78,16 @@ const getEnhancedImage = (image, enhancement) => {
   return image
 }
 
-const getPixelsAmount = (image) => {
+const getLitPixelsAmount = (image) => {
   let pixelCount = 0;
-  for (let i = 0; i < image.length; i++) {
+  for (let i = SQUARE_PIXEL_LENGTH; i < image.length - SQUARE_PIXEL_LENGTH; i++) {
     const line = image[i];
-    for (let j = 0; j < line.length; j++) {
+    for (let j = SQUARE_PIXEL_LENGTH; j < line.length - SQUARE_PIXEL_LENGTH; j++) {
       if (line[j]) pixelCount++;
     }
   }
   return pixelCount
 }
-
-
 
 
 fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
@@ -102,8 +100,8 @@ fs.readFile(path.resolve(__dirname, './input'), 'utf8', (err, data) => {
   let image = constructImageWithBorder(input);
 
   image = getEnhancedImage(image, enhancement);
-  
-  const pixelCount = getPixelsAmount(image);
+
+  const pixelCount = getLitPixelsAmount(image);
   
   console.log(`There are ${pixelCount} pixels lit in the resulting image`);
 
