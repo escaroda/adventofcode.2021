@@ -2,11 +2,11 @@ const fs = require('fs');
 const path = require("path");
 
 
-const AREA_RANGE = 50;
+const RANGE_LIMIT = 50;
 
-const getAreaPoints = ([left, right]) => {
-  left = left > -AREA_RANGE ? left : -AREA_RANGE;
-  right = right < AREA_RANGE ? right : AREA_RANGE;
+const getRangePoints = ([left, right]) => {
+  left = left > -RANGE_LIMIT ? left : -RANGE_LIMIT;
+  right = right < RANGE_LIMIT ? right : RANGE_LIMIT;
 
   const points = [];
   for (let i = left; i <= right; i++) {
@@ -15,11 +15,11 @@ const getAreaPoints = ([left, right]) => {
   return points
 }
 
-const getCubes = ([areaX, areaY, areaZ]) => {
+const getCubes = ([rangeX, rangeY, rangeZ]) => {
   const cubes = [];
-  for (const x of getAreaPoints(areaX)) {
-    for (const y of getAreaPoints(areaY)) {
-      for (const z of getAreaPoints(areaZ)) {
+  for (const x of getRangePoints(rangeX)) {
+    for (const y of getRangePoints(rangeY)) {
+      for (const z of getRangePoints(rangeZ)) {
         cubes.push([x, y, z]);
       }
     }
